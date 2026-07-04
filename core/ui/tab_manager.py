@@ -8,6 +8,7 @@ from modules.ai_packager import ui as ai_packager_ui
 from modules.docs_generator import ui as docs_generator_ui
 from modules.release_creator import ui as release_creator_ui
 from modules.llm_assistant import ui as llm_assistant_ui
+from modules.release_workspace import ui as release_workspace_ui
 
 
 class TabManager:
@@ -21,6 +22,15 @@ class TabManager:
         self._build_tabs()
 
     def _build_tabs(self):
+        # Release Workspace
+        workspace_frame = ttk.Frame(self.notebook)
+        self.notebook.add(workspace_frame, text="Release Workspace")
+        release_workspace_ui.build_ui(
+            workspace_frame,
+            status_var=self.status_var,
+            select_tab=lambda index: self.notebook.select(index),
+        )
+
         # Screenshots
         screenshots_frame = ttk.Frame(self.notebook)
         self.notebook.add(screenshots_frame, text="Screenshots")

@@ -1,5 +1,5 @@
 """
-Ship Studio Error Handling Framework
+FORGE Error Handling Framework
 
 Centralized exception handling, user-friendly error dialogs, and error reporting.
 """
@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 
 
 # Custom exception classes
-class ShipStudioError(Exception):
+class ForgeError(Exception):
     """Base exception for FORGE-specific errors."""
     
     def __init__(self, message: str, details: Optional[str] = None, recoverable: bool = True):
@@ -33,27 +33,27 @@ class ShipStudioError(Exception):
         return self.message
 
 
-class ProjectError(ShipStudioError):
+class ProjectError(ForgeError):
     """Errors related to project operations."""
     pass
 
 
-class BuildError(ShipStudioError):
+class BuildError(ForgeError):
     """Errors during build operations."""
     pass
 
 
-class LLMError(ShipStudioError):
+class LLMError(ForgeError):
     """Errors related to LLM operations."""
     pass
 
 
-class ValidationError(ShipStudioError):
+class ValidationError(ForgeError):
     """Input validation errors."""
     pass
 
 
-class FileOperationError(ShipStudioError):
+class FileOperationError(ForgeError):
     """File system operation errors."""
     pass
 
@@ -100,7 +100,7 @@ def show_exception(exc: Exception, context: str = "An error occurred",
         context: Context message
         parent: Parent window (optional)
     """
-    if isinstance(exc, ShipStudioError):
+    if isinstance(exc, ForgeError):
         # Custom FORGE exception with user-friendly message
         show_error(
             context,

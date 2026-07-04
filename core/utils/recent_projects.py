@@ -1,5 +1,5 @@
 """
-Ship Studio Recent Projects System
+FORGE Recent Projects System
 
 Track and provide quick access to recently used project paths.
 """
@@ -15,7 +15,7 @@ from core.utils.logging import get_logger
 logger = get_logger(__name__)
 
 # Recent projects file
-RECENT_PROJECTS_FILE = Path.home() / ".ship_studio" / "recent_projects.json"
+RECENT_PROJECTS_FILE = Path.home() / ".forge" / "recent_projects.json"
 MAX_RECENT_PROJECTS = 20
 
 

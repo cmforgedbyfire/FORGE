@@ -29,7 +29,7 @@ DOC_FILENAMES = [
 ]
 
 BUILD_DIR_NAMES = ["dist", "build", "out"]
-BUILD_LOG_NAME = "ship_studio_build_log.txt"
+BUILD_LOG_NAME = "forge_build_log.txt"
 AUDIT_LOG_NAME = "audit_log.jsonl"
 
 

@@ -1,5 +1,5 @@
 """
-Error handling utilities for Ship Studio.
+Error handling utilities for FORGE.
 """
 
 import tkinter as tk
@@ -25,7 +25,7 @@ def handle_operation_error(operation_name: str, error: Exception, show_dialog: b
     
     if show_dialog:
         show_error_dialog(
-            f"Ship Studio - {operation_name} Error",
+            f"FORGE - {operation_name} Error",
             f"An error occurred during {operation_name}.",
             str(error)
         )
@@ -50,7 +50,7 @@ def setup_global_exception_handler(root: tk.Tk):
         logger.error(f"Uncaught exception: {error_msg}")
         
         messagebox.showerror(
-            "Ship Studio - Unexpected Error",
+            "FORGE - Unexpected Error",
             "An unexpected error occurred. Please check the logs for details.\n\n"
             f"Error: {exc_value}"
         )

@@ -1,1 +1,1 @@
-# Core package for ship_studio
+﻿# Core package for forge

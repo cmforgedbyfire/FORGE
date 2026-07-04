@@ -281,7 +281,7 @@ class LLMAssistantUI:
             template = (
                 "Describe your product or project in your own words.\n"
                 "Example:\n"
-                "\"ship_studio is a desktop app that helps developers capture\n"
+                "\"FORGE is a desktop app that helps developers capture\n"
                 "screenshots, package apps, generate docs, and prepare releases.\"\n"
             )
         elif key == "readme_overview":
@@ -513,7 +513,7 @@ class LLMAssistantUI:
             "3) Enable 'AI Enabled' checkbox\n"
             "4) Click 'Check LLM' to verify connection\n"
             "5) Enter a prompt and click 'Send to Assistant'\n\n"
-            "💡 Note: If AI is disabled, Ship Studio will use\n"
+            "💡 Note: If AI is disabled, FORGE will use\n"
             "manual templates for documentation generation.\n\n"
             "Supported: Ollama, OpenAI API, custom endpoints",
         )

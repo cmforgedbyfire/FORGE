@@ -91,7 +91,7 @@ def build_ui(parent, status_var=None):
     tips_content_text = """📸 Screenshot Tips:
 
 • Use F11 for quick full-screen captures
-• Move Ship Studio to another monitor before capturing for clean marketing shots
+• Move FORGE to another monitor before capturing for clean marketing shots
 • Screenshots are automatically organized by date
 • Use region capture for specific UI elements
 

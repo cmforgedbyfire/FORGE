@@ -1,1 +1,1 @@
-# LLM Assistant module for ship_studio
+﻿# LLM Assistant module for forge

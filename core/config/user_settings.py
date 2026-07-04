@@ -13,7 +13,7 @@ from core.config.settings import (
 )
 
 
-SETTINGS_DIR = Path.home() / ".ship_studio"
+SETTINGS_DIR = Path.home() / ".forge"
 SETTINGS_PATH = SETTINGS_DIR / "settings.json"
 
 

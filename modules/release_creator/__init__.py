@@ -1,1 +1,1 @@
-# Release Creator module for ship_studio
+﻿# Release Creator module for forge

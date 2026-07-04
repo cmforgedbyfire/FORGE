@@ -1,5 +1,5 @@
-"""
-Ship Studio Keyboard Shortcuts System
+﻿"""
+FORGE Keyboard Shortcuts System
 
 Global keyboard shortcuts for common operations.
 """
@@ -128,7 +128,7 @@ class ShortcutManager:
 
 def setup_default_shortcuts(root: tk.Tk, app) -> ShortcutManager:
     """
-    Setup default Ship Studio keyboard shortcuts.
+    Setup default FORGE keyboard shortcuts.
     
     Args:
         root: Tkinter root window

@@ -1,4 +1,4 @@
-import tkinter as tk
+﻿import tkinter as tk
 from core.config.settings import APP_DISPLAY_NAME, VERSION
 from core.utils.logging import setup_logging
 
@@ -11,8 +11,8 @@ root.title(f"{APP_DISPLAY_NAME} v{VERSION}")
 root.geometry("800x600")
 
 # Add simple label
-label = tk.Label(root, text="Ship Studio Test", font=("Arial", 16))
+label = tk.Label(root, text="FORGE Test", font=("Arial", 16))
 label.pack(pady=50)
 
-print("Ship Studio starting...")
+print("FORGE starting...")
 root.mainloop()

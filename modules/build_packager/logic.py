@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Iterable, Tuple
 
 
-AUDIT_LOG_NAME = "ship_studio_audit.jsonl"
+AUDIT_LOG_NAME = "forge_audit.jsonl"
 
 
 def _has_any(root: Path, names: Iterable[str]) -> bool:
@@ -95,7 +95,7 @@ def _run_command(cmd: list[str], cwd: Path) -> Tuple[int, str]:
 
 
 def _save_build_log(root: Path, content: str) -> Path:
-    log_path = root / "ship_studio_build_log.txt"
+    log_path = root / "forge_build_log.txt"
     log_path.write_text(content, encoding="utf-8")
     return log_path
 

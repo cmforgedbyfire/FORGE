@@ -1,5 +1,5 @@
-APP_NAME = "Ship Studio"
-APP_DISPLAY_NAME = "Ship Studio"
+APP_NAME = "FORGE"
+APP_DISPLAY_NAME = "FORGE"
 VERSION = "1.0.0"
 
 # Default folders / behaviors

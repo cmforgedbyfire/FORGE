@@ -1,5 +1,5 @@
 """
-Modern UI styling for Ship Studio with professional theming.
+Modern UI styling for FORGE with professional theming.
 """
 
 import tkinter as tk
@@ -187,23 +187,43 @@ def configure_modern_style():
     )
 
 
-def create_card_frame(parent, title=None, **kwargs):
+def _bind_size_label(widget, label, prefix=""):
+    """Keep a small live width x height label synced with a widget."""
+    def update_size(event=None):
+        width = widget.winfo_width()
+        height = widget.winfo_height()
+        if width > 1 and height > 1:
+            label.configure(text=f"{prefix}{width} x {height}")
+
+    widget.bind("<Configure>", update_size, add="+")
+    widget.after_idle(update_size)
+
+
+def create_card_frame(parent, title=None, show_size=True, **kwargs):
     """Create a modern card-style frame with optional title."""
     # Main card container
     card = ttk.Frame(parent, style="Card.TFrame", **kwargs)
     
     if title:
-        # Title label
-        title_label = ttk.Label(
-            card, 
-            text=title, 
-            style="Heading.TLabel"
-        )
-        title_label.pack(
-            anchor="w", 
+        # Header row
+        header = ttk.Frame(card)
+        header.pack(
+            fill="x",
             padx=ModernTheme.PADDING_LG,
             pady=(ModernTheme.PADDING_LG, ModernTheme.PADDING_MD)
         )
+
+        title_label = ttk.Label(
+            header,
+            text=title, 
+            style="Heading.TLabel"
+        )
+        title_label.pack(side="left", anchor="w")
+
+        if show_size:
+            size_label = ttk.Label(header, text="", style="Muted.TLabel", anchor="e")
+            size_label.pack(side="right", anchor="e")
+            _bind_size_label(card, size_label)
         
         # Content frame
         content = ttk.Frame(card)

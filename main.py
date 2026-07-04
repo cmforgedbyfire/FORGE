@@ -1,8 +1,8 @@
-from core.ui.app_window import ShipStudioApp
+from core.ui.app_window import ForgeApp
 
 
 def main():
-    app = ShipStudioApp()
+    app = ForgeApp()
     app.run()
 
 

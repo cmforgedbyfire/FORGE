@@ -1,5 +1,5 @@
 """
-Configuration persistence for Ship Studio.
+Configuration persistence for FORGE.
 Save and restore user preferences, window state, and recent files.
 """
 
@@ -17,8 +17,8 @@ logger = get_logger(__name__)
 @dataclass
 class WindowState:
     """Window geometry and state."""
-    width: int = 1000
-    height: int = 700
+    width: int = 1033
+    height: int = 608
     x: int = 100
     y: int = 100
     maximized: bool = False
@@ -47,7 +47,7 @@ class PreferencesManager:
     """Manage application preferences persistence."""
     
     def __init__(self):
-        self.config_dir = Path.home() / ".ship_studio"
+        self.config_dir = Path.home() / ".forge"
         self.config_file = self.config_dir / "preferences.json"
         self.preferences = AppPreferences()
         

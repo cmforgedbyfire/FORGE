@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List
 
 
-AUDIT_LOG_NAME = "ship_studio_audit.jsonl"
+AUDIT_LOG_NAME = "forge_audit.jsonl"
 MODEL_EXTS = {".gguf", ".bin", ".pt", ".pth", ".safetensors", ".onnx"}
 CONFIG_EXTS = {".json", ".yaml", ".yml", ".toml"}
 SCRIPT_EXTS = {".py", ".sh", ".bat", ".ps1"}

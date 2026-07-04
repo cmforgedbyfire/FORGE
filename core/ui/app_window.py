@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from pathlib import Path
 
 from core.config.settings import APP_DISPLAY_NAME, VERSION
 from core.config.user_settings import load_llm_settings
@@ -13,21 +14,22 @@ from core.utils.errors import setup_global_exception_handler
 logger = get_logger(__name__)
 
 
-class ShipStudioApp:
+class ForgeApp:
     def __init__(self):
         # Setup logging first
         setup_logging(console=False)
         logger.info("="*60)
-        logger.info(f"Ship Studio {VERSION} - Application Starting")
+        logger.info(f"FORGE {VERSION} - Application Starting")
         logger.info("="*60)
         
         self.root = tk.Tk()
         self.root.title(f"{APP_DISPLAY_NAME} v{VERSION}")
+        self._set_window_icon()
         
         # Restore window state from preferences
         ws = preferences.preferences.window_state
         self.root.geometry(f"{ws.width}x{ws.height}+{ws.x}+{ws.y}")
-        self.root.minsize(900, 600)
+        self.root.minsize(900, 560)
         
         if ws.maximized:
             self.root.state('zoomed')
@@ -45,7 +47,19 @@ class ShipStudioApp:
         self._configure_style()
         self._build_layout()
         
-        logger.info("Ship Studio initialized successfully")
+        logger.info("FORGE initialized successfully")
+
+    def _set_window_icon(self):
+        """Set the source-run window icon to the FORGE brand icon."""
+        icon_path = Path(__file__).resolve().parents[2] / "assets" / "forge.ico"
+        if not icon_path.exists():
+            logger.warning(f"FORGE icon not found: {icon_path}")
+            return
+
+        try:
+            self.root.iconbitmap(str(icon_path))
+        except Exception as e:
+            logger.warning(f"Could not set FORGE window icon: {e}")
 
     def _on_closing(self):
         """Handle window closing - save state and cleanup."""
@@ -57,7 +71,7 @@ class ShipStudioApp:
             
             preferences.update_window_state(width, height, x, y, maximized)
             
-            logger.info("Ship Studio closing - state saved")
+            logger.info("FORGE closing - state saved")
         except Exception as e:
             logger.error(f"Error saving window state: {e}")
         
@@ -81,23 +95,30 @@ class ShipStudioApp:
         self.root.configure(bg=ModernTheme.BG_SECONDARY)
 
     def _build_layout(self):
+        self.status_var = tk.StringVar(value="Ready")
+        self.ai_mode_var = tk.StringVar(value="")
+        self.window_size_var = tk.StringVar(value="")
+
         # Main container
         self.main_frame = ttk.Frame(self.root)
         self.main_frame.pack(fill="both", expand=True)
 
         # Status bar at bottom
-        self.status_var = tk.StringVar(value="Ready")
-        self.ai_mode_var = tk.StringVar(value="")
-        
         status_frame = ttk.Frame(self.root)
         status_frame.pack(fill="x", side="bottom")
         
         status_label = ttk.Label(status_frame, textvariable=self.status_var, anchor="w")
         status_label.pack(side="left", fill="x", expand=True, padx=8, pady=4)
+
+        # Live window size indicator
+        window_size_label = ttk.Label(status_frame, textvariable=self.window_size_var, anchor="e")
+        window_size_label.pack(side="right", padx=8, pady=4)
         
         # AI mode indicator
         ai_mode_label = ttk.Label(status_frame, textvariable=self.ai_mode_var, anchor="e")
         ai_mode_label.pack(side="right", padx=8, pady=4)
+        self.root.bind("<Configure>", self._update_window_size, add="+")
+        self.root.after_idle(self._update_window_size)
         
         self._update_ai_mode_indicator()
 
@@ -107,15 +128,17 @@ class ShipStudioApp:
         # Update AI status periodically
         self._update_ai_mode_indicator()
         self.root.after(5000, self._schedule_ai_update)  # Check every 5 seconds
-    
-    def _update_ai_mode_indicator(self):
-        """Update the AI mode indicator."""
-        try:
-            ai_settings = load_llm_settings()
-            ai_status_text = "AI: Enabled" if ai_settings.enabled else "AI: Disabled"
-            self.ai_status_label.config(text=ai_status_text)
-        except Exception as e:
-            logger.warning(f"Could not update AI status: {e}")
+
+    def _update_window_size(self, event=None):
+        """Update live window dimensions in the status bar."""
+        if event is not None and event.widget is not self.root:
+            return
+        width = self.root.winfo_width()
+        height = self.root.winfo_height()
+        if width > 1 and height > 1:
+            size_text = f"Window: {width} x {height}"
+            self.window_size_var.set(size_text)
+            self.root.title(f"{APP_DISPLAY_NAME} v{VERSION} - {width} x {height}")
     
     def _schedule_ai_update(self):
         """Schedule periodic AI status updates."""
@@ -126,17 +149,14 @@ class ShipStudioApp:
         """Update AI mode indicator in status bar"""
         settings = load_llm_settings()
         if settings.enabled:
-            self.ai_mode_var.set("🤖 AI: Enabled")
+            self.ai_mode_var.set("AI: Enabled")
         else:
-            self.ai_mode_var.set("📝 AI: Disabled (Template Mode)")
-        
-        # Refresh every 5 seconds
-        self.root.after(5000, self._update_ai_mode_indicator)
+            self.ai_mode_var.set("AI: Disabled (Template Mode)")
 
     def run(self):
-        logger.info("Starting Ship Studio main loop")
+        logger.info("Starting FORGE main loop")
         try:
             self.root.mainloop()
         finally:
-            logger.info("Ship Studio application closed")
+            logger.info("FORGE application closed")
             logger.info("="*60)

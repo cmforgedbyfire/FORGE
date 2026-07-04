@@ -1,315 +1,97 @@
-# Ship Studio v1.0.0
+# FORGE
 
-**Release Engineering Toolkit by Forged By Fire Software LLC**
+FORGE is a free Windows desktop toolkit for solo builders who need to turn a rough project folder into something they can share.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-Proprietary-red.svg)
-![Python](https://img.shields.io/badge/python-3.8+-green.svg)
+It is aimed at the last mile of small software releases: checking what is missing, generating basic docs, collecting screenshots, running simple build/package flows, and creating a clean release folder with a manifest.
 
----
+## Current Status
 
-## 🔥 Overview
+FORGE is useful today as a release toolkit, but it is still early. The app now includes a Release Workspace audit screen that points users toward the existing tools:
 
-**Ship Studio** is a comprehensive desktop toolkit designed to streamline the entire software release process. From capturing screenshots and building packages to generating documentation and creating polished release bundles—Ship Studio handles it all in one unified interface.
+- Release Workspace: scans a project folder and gives a readiness score.
+- Screenshots: captures full screen, region, or centered window screenshots.
+- Build & Package: detects common project types and runs simple build/package actions.
+- AI Packager: gathers model/config/script files for AI or ML project releases.
+- Docs & Changelog: generates README, CHANGELOG, PRIVACY, and architecture notes with templates or optional AI.
+- Release Creator: creates a release folder with docs, screenshots, build outputs, and a manifest.
+- LLM Assistant: optional helper for generated copy and documentation.
 
-Ship Studio v1.0.0 represents a major leap forward with AI-optional features, template-based generation, and a robust architecture ready for production use.
+## Who It Is For
 
----
+FORGE is for solo builders using AI coding tools, small utilities, local apps, tiny games, and experiments that work on their machine but are not yet easy to hand to someone else.
 
-## ✨ Key Features
+The guiding question is simple:
 
-### 📸 **Screenshots Module**
-- Capture full screen, custom regions, or window-centered screenshots
-- Automated timestamping and organization
-- Drag-and-drop folder selection
-- Perfect for app stores, documentation, and marketing materials
+Can this help a solo builder ship a real release faster?
 
-### 🔨 **Build & Package Module**
-- Multi-language project support (Python, Node.js, .NET, Go, Rust, etc.)
-- Automated build execution with detailed logging
-- Dependency installation and environment detection
-- Build artifact collection and organization
+## Install From Source
 
-### 🤖 **AI Packager Module**
-- Scan and bundle AI/ML model files (.gguf, .pt, .safetensors, .onnx)
-- Organize configs, scripts, and model artifacts
-- Audit logging for AI project releases
-- Ideal for shipping trained models
+Requirements:
 
-### 📝 **Docs & Changelog Generator**
-- **AI-Powered**: Generate professional docs with LLM assistance
-- **Template Mode**: Use smart templates when AI is disabled
-- Auto-generate README, CHANGELOG, PRIVACY, ARCHITECTURE docs
-- Smart project detection and placeholder filling
+- Windows
+- Python 3.8 or newer
+- tkinter, usually included with Python
 
-### 🚀 **Release Creator**
-- One-click release bundle creation
-- Automated folder structure generation
-- Collect docs, screenshots, and build artifacts
-- Version tracking and manifest generation
-
-### 🧠 **LLM Assistant** *(Optional)*
-- AI-powered content generation for product descriptions, guides, and more
-- Support for Ollama, OpenAI API, Anthropic, and custom endpoints
-- **Fully optional**: Disable AI and use template-based alternatives
-- Preset workflows for common documentation tasks
-
----
-
-## 🎯 What's New in v1.0.0 "FORGE"
-
-### Major Changes
-- ✅ **Rebranded** from Ship Studio to FORGE
-- ✅ **AI-Optional Architecture**: Full functionality without requiring AI
-- ✅ **Template System**: Professional doc templates as AI fallback
-- ✅ **Generic LLM Support**: No longer tied to Ollama—use any compatible endpoint
-- ✅ **AI Mode Indicator**: Real-time status showing AI enabled/disabled
-- ✅ **Settings Migration**: Moved from `~/.ship_studio/` to `~/.forge/`
-- ✅ **Production Ready**: Stable, tested, and ready for serious use
-
-### Technical Improvements
-- Removed Ollama hardcoding
-- Added template-based doc generation
-- Improved error handling and user feedback
-- Enhanced LLM configuration flexibility
-- Better project type detection
-
----
-
-## 📦 Installation
-
-### Windows
-
-1. **Download** the installer: `Forge_1.0.0_Setup.exe`
-2. **Run** the installer
-3. **Launch** FORGE from your Start Menu or Desktop shortcut
-
-### From Source
-
-```bash
-# Clone the repository
-git clone https://github.com/YourOrg/forge.git
-cd forge
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run FORGE
+```powershell
+cd F:\company\FORGE
+python -m pip install -r requirements.txt
 python main.py
 ```
 
----
+You can also run:
 
-## 🚀 Quick Start
-
-### First Launch
-
-1. **Open FORGE** and familiarize yourself with the tabs
-2. **Configure AI** (optional):
-   - Navigate to "LLM Assistant" tab
-   - Enter your LLM endpoint URL (Ollama, OpenAI, custom)
-   - Enter your model name
-   - Enable "AI Enabled" checkbox
-   - Click "Check LLM" to verify connection
-
-### Creating Your First Release
-
-1. **Screenshots Tab**:
-   - Set output directory
-   - Capture screenshots of your app
-   
-2. **Build & Package Tab**:
-   - Select your project folder
-   - Choose project type (or use auto-detect)
-   - Click "Run Build" to compile/package
-   
-3. **Docs & Changelog Tab**:
-   - Select project folder
-   - Generate README, CHANGELOG, PRIVACY docs
-   - Edit and customize as needed
-   
-4. **Release Creator Tab**:
-   - Select project folder
-   - Choose release destination
-   - Enable docs, screenshots, and build outputs
-   - Click "Create Release" to bundle everything
-
----
-
-## 🛠️ Configuration
-
-### AI Configuration
-
-**Location**: LLM Assistant tab
-
-- **API Endpoint**: URL of your LLM server (e.g., `http://localhost:11434` for Ollama)
-- **Model**: Name of your model (e.g., `your-model-name`, `gpt-4`, `claude-3-5-sonnet`)
-- **Temperature**: 0.0 (deterministic) to 1.0 (creative)
-- **AI Enabled**: Toggle AI features on/off
-
-### Settings Files
-
-- **Location**: `~/.forge/settings.json`
-- **Logs**: `~/.forge/logs/` *(coming soon)*
-
-### Template Customization
-
-Templates are located in `core/templates/`:
-- `README.md`
-- `CHANGELOG.md`
-- `PRIVACY.md`
-- `ARCHITECTURE.md`
-
-Edit these files to customize the output when AI is disabled.
-
----
-
-## 🤖 AI Features (Optional)
-
-FORGE works perfectly **without AI**. When AI is disabled:
-- Documentation uses smart templates with project detection
-- Placeholders are filled based on project structure
-- All core features remain fully functional
-
-When AI is **enabled**:
-- Docs are generated with contextual awareness
-- LLM Assistant provides interactive help
-- Content is tailored to your specific project
-
-### Supported LLM Providers
-
-- **Ollama** (local): `http://localhost:11434`
-- **OpenAI API**: `https://api.openai.com/v1`
-- **Anthropic**: Via compatible proxy
-- **Custom Endpoints**: Any OpenAI-compatible API
-
----
-
-## 📚 Documentation
-
-### Module Guides
-
-- **Screenshots**: Capture professional screenshots with flexible options
-- **Build & Package**: Multi-language build automation
-- **AI Packager**: Bundle ML models and configs
-- **Docs Generator**: Create documentation with AI or templates
-- **Release Creator**: Assemble complete release packages
-- **LLM Assistant**: Interactive AI-powered content generation
-
-### Supported Project Types
-
-- Python (pip, poetry, conda)
-- Node.js (npm, yarn, pnpm)
-- .NET (C#, F#)
-- Go
-- Rust
-- Generic/Custom
-
----
-
-## 🏗️ Building from Source
-
-### Requirements
-
-- Python 3.8+
-- tkinter (usually included with Python)
-- See `requirements.txt` for all dependencies
-
-### Development Setup
-
-```bash
-# Install dev dependencies
-pip install -r requirements.txt
-
-# Run FORGE
-python main.py
+```powershell
+.\START_FORGE.bat
 ```
 
-### Building Executable
+## Basic Workflow
 
-```bash
-# Install PyInstaller
-pip install pyinstaller
+1. Open FORGE.
+2. In Release Workspace, choose a project folder.
+3. Review the readiness score and checklist.
+4. Use the Screenshots, Build, Docs, and Release tabs to fill the gaps.
+5. Create a release folder.
+6. Review the generated `manifest.json` and included files before sharing.
 
-# Build with spec file
-pyinstaller ShipStudio.spec
+## AI Is Optional
 
-# Find executable in dist/Forge.exe
+FORGE works without AI. When AI is disabled, docs are generated from local templates.
+
+If you enable AI, FORGE can use a local or compatible LLM endpoint for stronger summaries and generated text. The default endpoint is configured in `core/config/settings.py`.
+
+## Build An Executable
+
+```powershell
+python -m pip install pyinstaller
+pyinstaller FORGE.spec
 ```
 
-### Creating Installer
+Expected output:
 
-```bash
-# Install Inno Setup (Windows)
-# Open installer/ship_studio.iss in Inno Setup Compiler
-# Click Build → Compile
-# Find installer in installer/output/
+```text
+dist\FORGE.exe
 ```
 
----
+To create the Windows installer, compile `installer\forge.iss` with Inno Setup after `dist\FORGE.exe` exists.
 
-## 🔧 Troubleshooting
+## Project Notes
 
-### AI Not Working
+- Settings are stored under `~/.forge`.
+- Generated build folders, caches, and local release output are ignored by `.gitignore`.
+- The previous product direction is retired. FORGE is now focused on release readiness for solo builders.
 
-1. Verify LLM server is running
-2. Check API endpoint URL is correct
-3. Click "Check LLM" to test connection
-4. Enable "AI Enabled" checkbox
-5. If issues persist, disable AI and use template mode
+## License
 
-### Build Failures
+MIT License. See `LICENSE`.
 
-1. Check project type is correct (or use auto-detect)
-2. Verify all dependencies are installed
-3. Review build log for specific errors
-4. Try manual build first to identify issues
+## Support And Feedback
 
-### Missing Files in Release
+FORGE is a free project from Forged By Fire Software LLC.
 
-1. Ensure folders exist (docs/, screenshots/, build/)
-2. Check file permissions
-3. Review release manifest after creation
+If you try it, useful feedback is:
 
----
-
-## 📄 License
-
-Copyright © 2026 Forged By Fire Software LLC. All rights reserved.
-
-This software is proprietary. Unauthorized copying, distribution, or modification is prohibited.
-
----
-
-## 🤝 Support
-
-For issues, questions, or feature requests:
-
-- **Email**: support@forgedbyfirellc.com
-- **Documentation**: See `/docs` folder
-- **GitHub Issues**: (if applicable)
-
----
-
-## 🗺️ Roadmap
-
-### Coming Soon
-- ✨ Git integration (auto-tagging, commit-based changelogs)
-- ✨ Batch operations (process multiple projects)
-- ✨ Theme system (dark mode, light mode)
-- ✨ Plugin architecture for custom workflows
-- ✨ Cross-platform builds (macOS, Linux)
-
----
-
-## 🙏 Credits
-
-**Developed by**: Forged By Fire Software LLC  
-**Version**: 1.0.0 "FORGE"  
-**Release Date**: January 2026
-
-Built with ❤️ and 🔥
-
----
-
-*Transform your release process. Ship with confidence. Forge ahead.*
+- What project type you tested.
+- What FORGE detected correctly.
+- What it missed.
+- Whether the release folder was understandable.
+- Any error messages or confusing steps.

@@ -1,8 +1,8 @@
 """
-Ship Studio Logging Framework
+FORGE Logging Framework
 
 Centralized logging system with rotation, levels, and module-specific loggers.
-Logs stored in ~/.ship_studio/logs/ with automatic rotation and cleanup.
+Logs stored in ~/.forge/logs/ with automatic rotation and cleanup.
 """
 
 import logging
@@ -20,11 +20,11 @@ from typing import Optional
 import sys
 
 # Log directory setup
-LOG_DIR = Path.home() / ".ship_studio" / "logs"
+LOG_DIR = Path.home() / ".forge" / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 # Log file paths
-MAIN_LOG = LOG_DIR / "ship_studio.log"
+MAIN_LOG = LOG_DIR / "forge.log"
 ERROR_LOG = LOG_DIR / "errors.log"
 DEBUG_LOG = LOG_DIR / "debug.log"
 
@@ -111,7 +111,7 @@ def setup_logging(level: int = logging.INFO, console: bool = True) -> None:
     
     # Log startup
     root_logger.info("=" * 60)
-    root_logger.info("Ship Studio Logging System Initialized")
+    root_logger.info("FORGE Logging System Initialized")
     root_logger.info(f"Log directory: {LOG_DIR}")
     root_logger.info("=" * 60)
 

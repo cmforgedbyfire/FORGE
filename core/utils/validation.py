@@ -1,5 +1,5 @@
-"""
-Ship Studio Input Validation Framework
+﻿"""
+FORGE Input Validation Framework
 
 Comprehensive validation for paths, URLs, settings, and user inputs.
 Provides helpful error messages and suggestions.
@@ -518,7 +518,7 @@ class ValidationResult:
         
         lines = ["Validation errors:"]
         for field, message in self.errors:
-            lines.append(f"  • {field}: {message}")
+            lines.append(f"  â€¢ {field}: {message}")
         return "\n".join(lines)
     
     def raise_if_invalid(self):
