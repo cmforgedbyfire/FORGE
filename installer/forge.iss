@@ -1,5 +1,5 @@
 #define MyAppName "FORGE"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "Forged By Fire Software LLC"
 #define MyAppURL "https://cmforgedbyfire.com/"
 #define MyAppExeName "FORGE.exe"

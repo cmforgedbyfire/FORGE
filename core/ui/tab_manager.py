@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import traceback
 
 # Import module UIs
 from modules.screenshots import ui as screenshots_ui
@@ -22,41 +23,41 @@ class TabManager:
         self._build_tabs()
 
     def _build_tabs(self):
-        # Release Workspace
-        workspace_frame = ttk.Frame(self.notebook)
-        self.notebook.add(workspace_frame, text="Release Workspace")
-        release_workspace_ui.build_ui(
-            workspace_frame,
-            status_var=self.status_var,
-            select_tab=lambda index: self.notebook.select(index),
+        self._add_tab(
+            "Release Workspace",
+            lambda frame: release_workspace_ui.build_ui(
+                frame,
+                status_var=self.status_var,
+                select_tab=lambda index: self.notebook.select(index),
+            ),
         )
+        self._add_tab("Screenshots", lambda frame: screenshots_ui.build_ui(frame, status_var=self.status_var))
+        self._add_tab("Build & Package", lambda frame: build_packager_ui.build_ui(frame, status_var=self.status_var))
+        self._add_tab("AI Packager", lambda frame: ai_packager_ui.build_ui(frame, status_var=self.status_var))
+        self._add_tab("Docs & Changelog", lambda frame: docs_generator_ui.build_ui(frame, status_var=self.status_var))
+        self._add_tab("Release Creator", lambda frame: release_creator_ui.build_ui(frame, status_var=self.status_var))
+        self._add_tab("LLM Assistant", lambda frame: llm_assistant_ui.build_ui(frame, status_var=self.status_var))
 
-        # Screenshots
-        screenshots_frame = ttk.Frame(self.notebook)
-        self.notebook.add(screenshots_frame, text="Screenshots")
-        screenshots_ui.build_ui(screenshots_frame, status_var=self.status_var)
+    def _add_tab(self, title, build_func):
+        frame = ttk.Frame(self.notebook)
+        self.notebook.add(frame, text=title)
+        try:
+            build_func(frame)
+        except Exception:
+            self._show_tab_error(frame, title, traceback.format_exc())
+            if self.status_var is not None:
+                self.status_var.set(f"{title} failed to load. Other tools are still available.")
 
-        # Build Packager
-        build_frame = ttk.Frame(self.notebook)
-        self.notebook.add(build_frame, text="Build & Package")
-        build_packager_ui.build_ui(build_frame, status_var=self.status_var)
-
-        # AI Packager
-        ai_frame = ttk.Frame(self.notebook)
-        self.notebook.add(ai_frame, text="AI Packager")
-        ai_packager_ui.build_ui(ai_frame, status_var=self.status_var)
-
-        # Docs Generator
-        docs_frame = ttk.Frame(self.notebook)
-        self.notebook.add(docs_frame, text="Docs & Changelog")
-        docs_generator_ui.build_ui(docs_frame, status_var=self.status_var)
-
-        # Release Creator
-        release_frame = ttk.Frame(self.notebook)
-        self.notebook.add(release_frame, text="Release Creator")
-        release_creator_ui.build_ui(release_frame, status_var=self.status_var)
-
-        # LLM Assistant
-        llm_frame = ttk.Frame(self.notebook)
-        self.notebook.add(llm_frame, text="LLM Assistant")
-        llm_assistant_ui.build_ui(llm_frame, status_var=self.status_var)
+    def _show_tab_error(self, frame, title, details):
+        panel = ttk.Frame(frame)
+        panel.pack(fill="both", expand=True, padx=16, pady=16)
+        ttk.Label(panel, text=f"{title} could not load", font=("Segoe UI", 12, "bold")).pack(anchor="w")
+        ttk.Label(
+            panel,
+            text="The rest of FORGE is still available. Restart after fixing the issue or report the details below.",
+            wraplength=720,
+        ).pack(anchor="w", pady=(6, 10))
+        text = tk.Text(panel, height=14, wrap="word")
+        text.pack(fill="both", expand=True)
+        text.insert("1.0", details)
+        text.config(state="disabled")

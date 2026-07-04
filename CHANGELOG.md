@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- No unreleased changes.
+
+## 1.0.1 - 2026-07-04
+
+### Fixed
+
+- Fixed installed builds trying to create screenshots under `C:\Program Files\FORGE`.
+- Protected startup so one tab error cannot prevent the remaining tools from loading.
+- Restored a quick window-area screenshot action.
+
 ### Added
 
 - Added the Release Workspace tab with a lightweight release-readiness audit.

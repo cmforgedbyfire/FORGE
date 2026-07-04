@@ -1,6 +1,7 @@
 import os
 import datetime
 from pathlib import Path
+import tempfile
 
 import pyautogui
 
@@ -16,13 +17,22 @@ def get_default_output_dir(base_dir: str | None = None) -> str:
     Returns a default screenshot directory with date organization.
     """
     if base_dir is None:
-        base_dir = os.getcwd()
+        pictures_dir = Path.home() / "Pictures"
+        if pictures_dir.exists():
+            base_dir = str(pictures_dir / "FORGE")
+        else:
+            base_dir = str(Path.home() / "Documents" / "FORGE")
     
     # Organize by date
     today = datetime.date.today().strftime("%Y-%m-%d")
     output_dir = os.path.join(base_dir, "screenshots", today)
-    ensure_dir(output_dir)
-    return output_dir
+    try:
+        ensure_dir(output_dir)
+        return output_dir
+    except OSError:
+        fallback_dir = os.path.join(tempfile.gettempdir(), "FORGE", "screenshots", today)
+        ensure_dir(fallback_dir)
+        return fallback_dir
 
 
 def capture_full_screen(output_dir: str) -> str:

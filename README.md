@@ -6,7 +6,7 @@ It is aimed at the last mile of small software releases: checking what is missin
 
 ## Current Status
 
-FORGE is useful today as a release toolkit, but it is still early. The app now includes a Release Workspace audit screen that points users toward the existing tools:
+FORGE is useful today as a release toolkit, but it is still early. The app includes a Release Workspace audit screen that points users toward the existing tools:
 
 - Release Workspace: scans a project folder and gives a readiness score.
 - Screenshots: captures full screen, region, or centered window screenshots.

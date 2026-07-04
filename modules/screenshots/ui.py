@@ -64,6 +64,19 @@ def build_ui(parent, status_var=None):
         except Exception as e:
             messagebox.showerror("Error", f"Screenshot failed: {e}")
 
+    def capture_window_area():
+        messagebox.showinfo(
+            "Window Capture",
+            "Move your mouse over the window you want to capture, then press OK.\n\n"
+            "FORGE will save a 1280x720 screenshot centered on the cursor."
+        )
+        try:
+            x, y = pyautogui.position()
+            filename = logic.capture_centered_window_like(output_var.get(), x, y)
+            set_status(status_var, f"Captured: {filename}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Screenshot failed: {e}")
+
     full_btn = ttk.Button(buttons_frame, text="Full Screen (F11)", command=capture_full, style="Primary.TButton")
     full_btn.pack(side="left", padx=(0, ModernTheme.PADDING_MD))
     add_tooltip(full_btn, "Capture entire screen")
@@ -71,6 +84,10 @@ def build_ui(parent, status_var=None):
     region_btn = ttk.Button(buttons_frame, text="Region (F12)", command=capture_region)
     region_btn.pack(side="left")
     add_tooltip(region_btn, "Select region to capture")
+
+    window_btn = ttk.Button(buttons_frame, text="Window Area", command=capture_window_area)
+    window_btn.pack(side="left", padx=(ModernTheme.PADDING_MD, 0))
+    add_tooltip(window_btn, "Capture a 1280x720 area centered on the mouse cursor")
 
     # Status and tips
     tips_card, tips_content = create_card_frame(main_frame, "Tips")
@@ -92,6 +109,7 @@ def build_ui(parent, status_var=None):
 
 • Use F11 for quick full-screen captures
 • Move FORGE to another monitor before capturing for clean marketing shots
+• Use Window Area for a quick 1280x720 app screenshot
 • Screenshots are automatically organized by date
 • Use region capture for specific UI elements
 
