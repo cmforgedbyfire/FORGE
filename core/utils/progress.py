@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from core.utils.logging import get_logger
+from core.ui.modern_theme import ModernTheme
 
 logger = get_logger(__name__)
 
@@ -52,6 +53,7 @@ class ProgressDialog:
         self.dialog.title(title)
         self.dialog.transient(parent)
         self.dialog.resizable(False, False)
+        self.dialog.configure(bg=ModernTheme.BG_PRIMARY)
         
         # Center on parent
         if parent:
@@ -75,8 +77,7 @@ class ProgressDialog:
         
         # Details label (for percentage/time)
         self.details_var = tk.StringVar(value="")
-        details_label = ttk.Label(self.dialog, textvariable=self.details_var,
-                                 font=("", 8), foreground="gray")
+        details_label = ttk.Label(self.dialog, textvariable=self.details_var, style="Muted.TLabel")
         details_label.pack(fill="x", padx=10)
         
         # Cancel button

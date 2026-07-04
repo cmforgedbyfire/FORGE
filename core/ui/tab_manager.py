@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 import traceback
 
+from core.ui.modern_theme import ModernTheme
+
 # Import module UIs
 from modules.screenshots import ui as screenshots_ui
 from modules.build_packager import ui as build_packager_ui
@@ -49,15 +51,29 @@ class TabManager:
                 self.status_var.set(f"{title} failed to load. Other tools are still available.")
 
     def _show_tab_error(self, frame, title, details):
-        panel = ttk.Frame(frame)
+        panel = ttk.Frame(frame, style="Card.TFrame")
         panel.pack(fill="both", expand=True, padx=16, pady=16)
-        ttk.Label(panel, text=f"{title} could not load", font=("Segoe UI", 12, "bold")).pack(anchor="w")
+        ttk.Label(panel, text=f"{title} could not load", style="CardHeading.TLabel").pack(anchor="w")
         ttk.Label(
             panel,
             text="The rest of FORGE is still available. Restart after fixing the issue or report the details below.",
             wraplength=720,
+            style="Card.TLabel",
         ).pack(anchor="w", pady=(6, 10))
-        text = tk.Text(panel, height=14, wrap="word")
+        text = tk.Text(
+            panel,
+            height=14,
+            wrap="word",
+            bg=ModernTheme.BG_SECONDARY,
+            fg=ModernTheme.TEXT_PRIMARY,
+            insertbackground=ModernTheme.TEXT_PRIMARY,
+            relief="solid",
+            borderwidth=1,
+            highlightthickness=1,
+            highlightbackground=ModernTheme.BORDER_COLOR,
+            highlightcolor=ModernTheme.BORDER_FOCUS,
+            font=("Consolas", 9),
+        )
         text.pack(fill="both", expand=True)
         text.insert("1.0", details)
         text.config(state="disabled")

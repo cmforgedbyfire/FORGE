@@ -169,7 +169,15 @@ def build_ui(parent, status_var=None):
         wrap="word",
         font=('Consolas', 9),
         bg=ModernTheme.BG_SECONDARY,
-        relief="flat",
+        fg=ModernTheme.TEXT_PRIMARY,
+        insertbackground=ModernTheme.TEXT_PRIMARY,
+        selectbackground=ModernTheme.BG_PANEL_RAISED,
+        selectforeground=ModernTheme.TEXT_PRIMARY,
+        relief="solid",
+        borderwidth=1,
+        highlightthickness=1,
+        highlightbackground=ModernTheme.BORDER_COLOR,
+        highlightcolor=ModernTheme.BORDER_FOCUS,
         padx=ModernTheme.PADDING_MD,
         pady=ModernTheme.PADDING_MD
     )

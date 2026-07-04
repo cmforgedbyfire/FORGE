@@ -1,6 +1,6 @@
 APP_NAME = "FORGE"
 APP_DISPLAY_NAME = "FORGE"
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 
 # Default folders / behaviors
 DEFAULT_SCREENSHOT_DIR_NAME = "screenshots"

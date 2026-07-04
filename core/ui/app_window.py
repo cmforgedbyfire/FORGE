@@ -92,7 +92,7 @@ class ForgeApp:
         configure_modern_style()
         
         # Configure window background
-        self.root.configure(bg=ModernTheme.BG_SECONDARY)
+        self.root.configure(bg=ModernTheme.BG_PRIMARY)
 
     def _build_layout(self):
         self.status_var = tk.StringVar(value="Ready")
@@ -100,23 +100,23 @@ class ForgeApp:
         self.window_size_var = tk.StringVar(value="")
 
         # Main container
-        self.main_frame = ttk.Frame(self.root)
-        self.main_frame.pack(fill="both", expand=True)
+        self.main_frame = ttk.Frame(self.root, style="Surface.TFrame")
+        self.main_frame.pack(fill="both", expand=True, padx=10, pady=(10, 0))
 
         # Status bar at bottom
-        status_frame = ttk.Frame(self.root)
+        status_frame = ttk.Frame(self.root, style="Status.TFrame")
         status_frame.pack(fill="x", side="bottom")
         
-        status_label = ttk.Label(status_frame, textvariable=self.status_var, anchor="w")
-        status_label.pack(side="left", fill="x", expand=True, padx=8, pady=4)
+        status_label = ttk.Label(status_frame, textvariable=self.status_var, anchor="w", style="Status.TLabel")
+        status_label.pack(side="left", fill="x", expand=True, padx=10, pady=5)
 
         # Live window size indicator
-        window_size_label = ttk.Label(status_frame, textvariable=self.window_size_var, anchor="e")
-        window_size_label.pack(side="right", padx=8, pady=4)
+        window_size_label = ttk.Label(status_frame, textvariable=self.window_size_var, anchor="e", style="Status.TLabel")
+        window_size_label.pack(side="right", padx=10, pady=5)
         
         # AI mode indicator
-        ai_mode_label = ttk.Label(status_frame, textvariable=self.ai_mode_var, anchor="e")
-        ai_mode_label.pack(side="right", padx=8, pady=4)
+        ai_mode_label = ttk.Label(status_frame, textvariable=self.ai_mode_var, anchor="e", style="Status.TLabel")
+        ai_mode_label.pack(side="right", padx=10, pady=5)
         self.root.bind("<Configure>", self._update_window_size, add="+")
         self.root.after_idle(self._update_window_size)
         

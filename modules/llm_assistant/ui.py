@@ -2,6 +2,7 @@ import threading
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 
+from core.ui.modern_theme import ModernTheme
 from core.utils.helpers import set_status
 from modules.llm_assistant import logic
 
@@ -146,6 +147,7 @@ class LLMAssistantUI:
         input_frame.pack(fill="both", expand=True, pady=(0, 8))
 
         self.input_text = tk.Text(input_frame, height=7, wrap="word")
+        self._style_text_widget(self.input_text)
         self.input_text.pack(fill="both", expand=True, padx=4, pady=4)
 
         # Quick send button
@@ -162,6 +164,7 @@ class LLMAssistantUI:
         output_frame.pack(fill="both", expand=True, pady=(0, 8))
 
         self.output_text = tk.Text(output_frame, height=14, wrap="word", state="normal")
+        self._style_text_widget(self.output_text)
         self.output_text.pack(fill="both", expand=True, padx=4, pady=4)
 
         # Control buttons
@@ -208,6 +211,23 @@ class LLMAssistantUI:
         info_label.pack(fill="x", pady=(4, 0))
 
         self._refresh_ai_status()
+
+    def _style_text_widget(self, widget):
+        widget.configure(
+            bg=ModernTheme.BG_SECONDARY,
+            fg=ModernTheme.TEXT_PRIMARY,
+            insertbackground=ModernTheme.TEXT_PRIMARY,
+            selectbackground=ModernTheme.BG_PANEL_RAISED,
+            selectforeground=ModernTheme.TEXT_PRIMARY,
+            relief="solid",
+            borderwidth=1,
+            highlightthickness=1,
+            highlightbackground=ModernTheme.BORDER_COLOR,
+            highlightcolor=ModernTheme.BORDER_FOCUS,
+            font=ModernTheme.FONT_BODY,
+            padx=ModernTheme.PADDING_MD,
+            pady=ModernTheme.PADDING_MD,
+        )
 
     # ---------------- Drag & Drop setup ----------------
 
